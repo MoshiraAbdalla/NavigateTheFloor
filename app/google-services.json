@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "169030420187",
+    "firebase_url": "https://navilooraa.firebaseio.com",
+    "project_id": "navilooraa",
+    "storage_bucket": "navilooraa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169030420187:android:367bb427598607dcc36efe",
+        "android_client_info": {
+          "package_name": "com.example.naviloora"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169030420187-jh6f3rl3jlbrojn6lu12u5abfkvuklaj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.naviloora",
+            "certificate_hash": "08e4c2cd2344d26688f50d71a66ee0bb1b6d90c7"
+          }
+        },
+        {
+          "client_id": "169030420187-5c7um6tdmvub8uedta7d5uncirkbt2b0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBoCYvJMTnBC1yPwKOy2nsaRoMTo7GAjo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169030420187-5c7um6tdmvub8uedta7d5uncirkbt2b0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
