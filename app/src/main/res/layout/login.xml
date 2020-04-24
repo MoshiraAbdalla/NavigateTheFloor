@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/RelativeLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+
+    <ImageView
+        android:id="@+id/Map"
+        android:layout_width="400dp"
+        android:layout_height="1960dp"
+        android:src="@drawable/map"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"/>
+
+    <ImageView
+        android:id="@+id/Man"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/man"
+
+        />
+
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"   />
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/line">
+
+    </ImageView>
+
+
+</RelativeLayout>
+
+
