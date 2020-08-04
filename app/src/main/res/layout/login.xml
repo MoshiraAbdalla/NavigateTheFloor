@@ -2,14 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
     android:id="@+id/RelativeLayout"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
 
     <ImageView
         android:id="@+id/Map"
-        android:layout_width="400dp"
-        android:layout_height="1960dp"
+        android:layout_width="540dp"
+        android:layout_height="1170dp"
         android:src="@drawable/map"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"/>
@@ -19,6 +19,13 @@
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:src="@drawable/man"
+
+        />
+    <ImageView
+        android:id="@+id/Man2"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/man2"
 
         />
 

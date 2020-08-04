@@ -36,7 +36,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-
+import java.util.*;
+import java.lang.*;
+import java.io.*;
 import static android.graphics.Color.*;
 
 
@@ -44,6 +46,7 @@ public class login extends AppCompatActivity {
     private static final String TAG = "login";
 
     private ImageView image;
+    private ImageView image2;
     private ImageView drawing;
     private ViewGroup mainlayout;
     private DatabaseReference myRef;
@@ -61,21 +64,17 @@ public class login extends AppCompatActivity {
         setContentView(R.layout.login);
 
         image = (ImageView) findViewById(R.id.Man);
+        image2 = (ImageView) findViewById(R.id.Man2);
         list = (ListView) findViewById(R.id.list);
         mainlayout = (RelativeLayout) findViewById(R.id.RelativeLayout);
         drawing = (ImageView) findViewById(R.id.line);
 
-        //setting an initial position for the green dot ( which represents a person )
-        image.setX(100);
-        image.setY(155);
+
         // Adding rooms names in the list
 
-        arrayList.add("معمل إختبارات");
         arrayList.add("حمام رجال");
         arrayList.add("حمام سيدات");
-        arrayList.add("معمل كمبيوتر");
         arrayList.add("ورشة");
-        arrayList.add("قاعة مناقشة");
         arrayList.add("مكتب معيدات");
         arrayList.add("فصل 1");
         arrayList.add("فصل 2");
@@ -85,11 +84,25 @@ public class login extends AppCompatActivity {
         arrayList.add("فصل 3");
         arrayList.add("فصل 4");
         arrayList.add("مكتب دكتور حنفي");
+        arrayList.add("مكتب 412");
+        arrayList.add("مكتب 428");
+        arrayList.add("مكتب 429");
+        arrayList.add("مكتب 430");
+        arrayList.add("معمل شبكات الحاسب");
+        arrayList.add("ورشة");
+        arrayList.add("معمل الدوائر الرقمية");
+        arrayList.add("معمل التحكم بالحاسبات");
+        arrayList.add("معمل التحكم");
+        arrayList.add("معمل تشخيص الاعطال");
+        arrayList.add("سلم خلفي");
+        arrayList.add("قاعة شبكة المعلومات");
+        //  arrayList.add("esp32data");
+        //   arrayList.add("مكتب دكتور عبدالله");
 
-       // arrayList.add("مكتب دكتور عبدالله");
-    //    arrayList.add("مكتب دكتور حسين");
-    //    arrayList.add("مكتب دكتور أحمد محمود");
-    //    arrayList.add("مكتب معيدين");
+        // arrayList.add("مكتب دكتور عبدالله");
+        //    arrayList.add("مكتب دكتور حسين");
+        //    arrayList.add("مكتب دكتور أحمد محمود");
+        //    arrayList.add("مكتب معيدين");
 
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
         list.setVisibility(View.GONE); // remove the list if you are not searching
@@ -111,14 +124,41 @@ public class login extends AppCompatActivity {
                 myRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+
                         String X =  dataSnapshot.child(roomname).child("x").getValue().toString(); // getting the x position of the requested room from the database
                         String Y =  dataSnapshot.child(roomname).child("y").getValue().toString(); // getting the y position of the requested room from the database
+                        String  mobile_distance =  dataSnapshot.child("esp32data").child("data").getValue().toString(); // getting the y position of the requested room from the database
                         // changing the x and y from string to int
                         final float roomY = Float.parseFloat(Y);
                         final float roomX = Float.parseFloat(X);
+                        float dis = Float.parseFloat(mobile_distance);
+                        final float  distance= (float) (dis* 39.370);//convert the meters into inches
+
+
+                        toastMessage("wait until getting ur position ");
+                        //setting an initial position for the green dot ( which represents a person )
+                        image.setX(distance);
+                        image.setY(155);
+                        toastMessage("u are here " + distance + " !...");
+                      /*  new Handler().postDelayed(new Runnable() {
+                            public void run() {
+                                float newdistance=0;
+                                for(int i=0;i<20;i++){
+                                    newdistance += distance;
+                                }
+                                final float newdistance2=newdistance/20;
+
+                                toastMessage("wait until getting ur position ");
+                                //setting an initial position for the green dot ( which represents a person )
+                                image.setX(newdistance2);
+                                image.setY(155);
+                                toastMessage("u are here " + newdistance2 + " !...");
+                            }
+                        }, 25000);*/
+
+
                         int geting_image_x = (int) image.getX();
                         int geting_image_y= (int) image.getY();
-
                         // Drawing the Line between the green dot and the room requested
 
                         final Bitmap bitmap = Bitmap.createBitmap((int) getWindowManager().getDefaultDisplay().getWidth(), (int) getWindowManager().getDefaultDisplay().getHeight(), Bitmap.Config.ARGB_8888);
@@ -137,11 +177,11 @@ public class login extends AppCompatActivity {
                         new Handler().postDelayed(new Runnable() {
                             public void run() {
                                 drawing.setImageDrawable(null);
-                              // canvas.drawCircle(settingX,settingY,25,paint1);
-                                image.setX(roomX);
-                                image.setY(roomY);
+                                // canvas.drawCircle(settingX,settingY,25,paint1);
+                                image2.setX(roomX);
+                                image2.setY(roomY);
                             }
-                        }, 5000);
+                        }, 10000);
 
                     }
 
@@ -155,18 +195,18 @@ public class login extends AppCompatActivity {
         });
 
     }
-//toastMessage
+    //toastMessage
     private void toastMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
 
-//Function to add the list to the search bar using a search menu
+    //Function to add the list to the search bar using a search menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_menu,menu);
         MenuItem searchitem=menu.findItem(R.id.search);
-       final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchitem);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchitem);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
             @Override
             public boolean onQueryTextChange(String newText) {
@@ -203,4 +243,13 @@ class point {
         this.y = y;
     }
 }
+class mob_distance{
+    public float data  ;
+
+
+    public  mob_distance(float data) {
+        this.data = data;
+    }
+}
+
 
